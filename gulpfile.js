@@ -36,15 +36,6 @@ gulp.task("sass", function() {
     .on("error", plugins.util.log);
 });
 
-// Copy files to "dist"
-gulp.task("files", function () {
-  return gulp.src(["src/*.*"], {dot: true}).pipe(gulp.dest("dist"));
-});
-
-
-// Delete dist Directory
-gulp.task("clean", require("del").bind(null, ["dist"]));
-
 // CSS
 gulp.task("css", function() {
   return gulp.src("src/css/*.css")
@@ -53,6 +44,7 @@ gulp.task("css", function() {
     .on("error", plugins.util.log);
 });
 
+// Optimize images
 gulp.task("images", function () {
   return gulp.src("src/images/**/*")
     .pipe(plugins.cache(plugins.imagemin({
@@ -65,6 +57,17 @@ gulp.task("images", function () {
     .pipe(gulp.dest("dist/images"));
 });
 
+// Copy files to "dist"
+gulp.task("files", function () {
+  return gulp.src(["src/*.*"], {dot: true}).pipe(gulp.dest("dist"));
+});
+
+
+// Delete dist Directory
+gulp.task("clean", require("del").bind(null, ["dist"]));
+
+
+// Lint JS
 gulp.task("lint", function() {
   return gulp.src(["src/js/**/*.js"])
     .pipe(plugins.cached("js")) //Process only changed files
@@ -73,10 +76,12 @@ gulp.task("lint", function() {
     .pipe(plugins.eslint.failOnError())
 });
 
+// Copy JSPM packages, unprocessed
 gulp.task("jspm", function() {
   return gulp.src("src/jspm_packages/**/*").pipe(gulp.dest("dist/jspm_packages"));
 });
 
+// Copy JS files after lint
 gulp.task("js", ["lint"], function() {
   return gulp.src("src/js/**/*.js").pipe(gulp.dest("dist/js"));
 });
@@ -86,6 +91,7 @@ gulp.task("bundle", ["js", "jspm"], plugins.shell.task([
   "cd dist; jspm bundle js/main app.js"
 ]));
 
+// Minimize HTML
 gulp.task("html", function() {
   var opts = {
     conditionals: true
@@ -111,7 +117,7 @@ gulp.task("gzip", function() {
   return gulp.src("dist/**/*").pipe(plugins.size({title: "build", gzip: true}));
 });
 
-// serve task
+// Serve task
 gulp.task("serve", ["browser-sync", "sass", "lint"], function() {
   gulp.watch("src/sass/**/*.scss", ["sass"]);
   gulp.watch("src/js/**/*.js", ["lint"]);
@@ -120,6 +126,7 @@ gulp.task("serve", ["browser-sync", "sass", "lint"], function() {
 // Default
 gulp.task("default", ["serve"]);
 
+// Build task
 gulp.task("build", function() {
   runSequence(
     "clean",
