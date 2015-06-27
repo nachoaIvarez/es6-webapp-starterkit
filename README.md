@@ -3,6 +3,8 @@
 
 ## Features
 
+[![Join the chat at https://gitter.im/nachoaIvarez/es6-webapp-starterkit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nachoaIvarez/es6-webapp-starterkit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Please see our [gulpfile.js](./gulpfile.js) for up to date information on what we support.
 
 * Automagic ES6 support
