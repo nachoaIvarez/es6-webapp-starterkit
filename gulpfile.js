@@ -1,26 +1,11 @@
+/*eslint-env node */
+
 "use strict";
 
 var gulp = require("gulp");
 var plugins = require("gulp-load-plugins")();
 var browserSync = require("browser-sync");
 var runSequence = require("run-sequence");
-
-// BrowserSync Server
-gulp.task("browser-sync", function() {
-  browserSync.init([
-    "src/css/*.css",
-    "src/js/**/*.js",
-    "src/**/*.html"
-  ], {
-    notify: false,
-    server: {
-      baseDir: ["src"]
-    },
-    port: 666,
-    browser: [],
-    tunnel: false
-  });
-});
 
 // SASS
 gulp.task("sass", function() {
@@ -33,6 +18,7 @@ gulp.task("sass", function() {
     .on("error", plugins.util.log)
     .pipe(plugins.sourcemaps.write("."))
     .pipe(gulp.dest("src/css"))
+    .pipe(browserSync.stream())
     .on("error", plugins.util.log);
 });
 
@@ -44,7 +30,6 @@ gulp.task("css", function() {
     .on("error", plugins.util.log);
 });
 
-// Optimize images
 gulp.task("images", function () {
   return gulp.src("src/images/**/*")
     .pipe(plugins.cache(plugins.imagemin({
@@ -57,31 +42,49 @@ gulp.task("images", function () {
     .pipe(gulp.dest("dist/images"));
 });
 
-// Copy files to "dist"
-gulp.task("files", function () {
-  return gulp.src(["src/*.*"], {dot: true}).pipe(gulp.dest("dist"));
-});
-
-
-// Delete dist Directory
-gulp.task("clean", require("del").bind(null, ["dist"]));
-
-
-// Lint JS
 gulp.task("lint", function() {
   return gulp.src(["src/js/**/*.js"])
     .pipe(plugins.cached("js")) //Process only changed files
     .pipe(plugins.eslint())
     .pipe(plugins.eslint.format())
-    .pipe(plugins.eslint.failOnError())
+    .pipe(plugins.eslint.failOnError());
 });
 
-// Copy JSPM packages, unprocessed
+// BrowserSync Server
+gulp.task("serve", ["sass", "lint"], function() {
+  browserSync.init([
+    "src/css/*.css",
+    "src/js/**/*.js",
+    "src/**/*.html"
+  ], {
+    notify: false,
+    server: {
+      baseDir: ["src"]
+    },
+    port: 3000,
+    browser: [],
+    tunnel: false
+  });
+
+  gulp.watch("src/scss/**/*.scss", ["sass"]);
+  gulp.watch("src/js/**/*.js", ["lint"]);
+});
+
+// Default
+gulp.task("default", ["serve"]);
+
+// Copy files to "dist"
+gulp.task("files", function () {
+  return gulp.src(["src/*.*", "CNAME"], {dot: true}).pipe(gulp.dest("dist"));
+});
+
+// Delete dist Directory
+gulp.task("clean", require("del").bind(null, ["dist"]));
+
 gulp.task("jspm", function() {
   return gulp.src("src/jspm_packages/**/*").pipe(gulp.dest("dist/jspm_packages"));
 });
 
-// Copy JS files after lint
 gulp.task("js", ["lint"], function() {
   return gulp.src("src/js/**/*.js").pipe(gulp.dest("dist/js"));
 });
@@ -91,7 +94,6 @@ gulp.task("bundle", ["js", "jspm"], plugins.shell.task([
   "cd dist; jspm bundle js/main app.js"
 ]));
 
-// Minimize HTML
 gulp.task("html", function() {
   var opts = {
     conditionals: true
@@ -117,16 +119,6 @@ gulp.task("gzip", function() {
   return gulp.src("dist/**/*").pipe(plugins.size({title: "build", gzip: true}));
 });
 
-// Serve task
-gulp.task("serve", ["browser-sync", "sass", "lint"], function() {
-  gulp.watch("src/sass/**/*.scss", ["sass"]);
-  gulp.watch("src/js/**/*.js", ["lint"]);
-});
-
-// Default
-gulp.task("default", ["serve"]);
-
-// Build task
 gulp.task("build", function() {
   runSequence(
     "clean",
