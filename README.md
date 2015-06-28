@@ -1,4 +1,4 @@
-> Future-proof starterkit for modern ES6 web apps using [gulp](http://gulpjs.com/) for the build process and [jspm](http://jspm.io/) to manage dependencies on top of [SystemJS](https://github.com/systemjs/systemjs)
+> Future-proof, framework-agnostic, starterkit for modern ES6 web apps using [gulp](http://gulpjs.com/) for the build process and [jspm](http://jspm.io/) to manage dependencies on top of [SystemJS](https://github.com/systemjs/systemjs)
 
 
 ## Features
@@ -14,7 +14,13 @@ Please see our [gulpfile.js](./gulpfile.js) for up to date information on what w
 * Map compiled CSS to source stylesheets with source maps
 * Awesome image optimization
 * HTML minification
-* Gzip all the things!
+* Gzip all the things! 
+
+
+## Framework agnostic
+
+* Just vainilla ES6 out of the box.
+* No framework preinstalled, but you can use this with React, Angular, Polymer, Ember, you name it. That's your call. 
 
 
 ## libsass
