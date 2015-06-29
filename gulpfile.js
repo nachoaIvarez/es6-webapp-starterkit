@@ -53,7 +53,6 @@ gulp.task("lint", function() {
 // BrowserSync Server
 gulp.task("serve", ["sass", "lint"], function() {
   browserSync.init([
-    "src/css/*.css",
     "src/js/**/*.js",
     "src/**/*.html"
   ], {
