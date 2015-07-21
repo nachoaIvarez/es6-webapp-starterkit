@@ -51,7 +51,7 @@ gulp.task("lint", () => {
     .pipe(plugins.cached("js")) //Process only changed files
     .pipe(plugins.eslint())
     .pipe(plugins.eslint.format())
-    // .pipe(plugins.eslint.failOnError()); // Uncomment this line to make build fail at violations
+    .pipe(plugins.eslint.failOnError());
 });
 
 // BrowserSync Server
