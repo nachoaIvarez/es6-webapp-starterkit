@@ -1,5 +1,5 @@
 "format es6";
 
-let ar = 666;
+let hi = `Hope you dig my starterkit :)`;
 
-console.log(`${ar}`);
+console.log(`${hi}`);

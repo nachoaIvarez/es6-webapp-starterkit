@@ -13,7 +13,7 @@ const reload = browserSync.reload;
 
 // SASS
 gulp.task("sass", () => {
-  gulp.src("src/scss/*.scss")
+  return gulp.src("src/scss/*.scss")
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass())
     .pipe(plugins.sourcemaps.write({includeContent: false}))
@@ -23,19 +23,19 @@ gulp.task("sass", () => {
     .pipe(plugins.sourcemaps.write("."))
     .pipe(gulp.dest("src/css"))
     .pipe(browserSync.stream())
-    .on("error", plugins.util.log)
+    .on("error", plugins.util.log);
 });
 
 // CSS
 gulp.task("css", () => {
-  gulp.src("src/css/*.css")
+  return gulp.src("src/css/*.css")
     .pipe(plugins.csso())
     .pipe(gulp.dest("dist/css"))
-    .on("error", plugins.util.log)
+    .on("error", plugins.util.log);
 });
 
 gulp.task("images", () => {
-  gulp.src("src/images/**/*")
+  return gulp.src("src/images/**/*")
     .pipe(plugins.cache(plugins.imagemin({
       progressive: true,
       interlaced: true,
@@ -43,15 +43,15 @@ gulp.task("images", () => {
       // as hooks for embedding and styling
       svgoPlugins: [{cleanupIDs: false}]
     })))
-    .pipe(gulp.dest("dist/images"))
+    .pipe(gulp.dest("dist/images"));
 });
 
 gulp.task("lint", () => {
-  gulp.src(["src/js/**/*.js"])
+  return gulp.src(["src/js/**/*.js"])
     .pipe(plugins.cached("js")) //Process only changed files
     .pipe(plugins.eslint())
     .pipe(plugins.eslint.format())
-    .pipe(plugins.eslint.failOnError())
+    // .pipe(plugins.eslint.failOnError()); // Uncomment this line to make build fail at violations
 });
 
 // BrowserSync Server
@@ -78,18 +78,18 @@ gulp.task("default", ["serve"]);
 
 // Copy files to "dist"
 gulp.task("files", () => {
-  gulp.src(["src/*.*", "CNAME"], {dot: true}).pipe(gulp.dest("dist"))
+  return gulp.src(["src/*.*", "CNAME"], {dot: true}).pipe(gulp.dest("dist"));
 });
 
 // Delete dist Directory
 gulp.task("clean", del.bind(null, ["dist"]));
 
 gulp.task("jspm", () => {
-  gulp.src("src/jspm_packages/**/*").pipe(gulp.dest("dist/jspm_packages"))
+  return gulp.src("src/jspm_packages/**/*").pipe(gulp.dest("dist/jspm_packages"));
 });
 
 gulp.task("js", ["lint"], () => {
-  gulp.src("src/js/**/*.js").pipe(gulp.dest("dist/js"))
+  return gulp.src("src/js/**/*.js").pipe(gulp.dest("dist/js"));
 });
 
 // Bundle with jspm
@@ -108,18 +108,18 @@ gulp.task("html", () => {
 
 // Uglify the bundle
 gulp.task("uglify", () => {
-  gulp.src("dist/app.js")
+  return gulp.src("dist/app.js")
     .pipe(plugins.sourcemaps.init({
       loadMaps: true
     }))
     .pipe(plugins.uglify())
     .pipe(plugins.sourcemaps.write("."))
     .pipe(gulp.dest("dist"))
-    .on("error", plugins.util.log)
+    .on("error", plugins.util.log);
 });
 
 gulp.task("gzip", () => {
-  gulp.src("dist/**/*").pipe(plugins.size({title: "build", gzip: true}))
+  return gulp.src("dist/**/*").pipe(plugins.size({title: "build", gzip: true}));
 });
 
 gulp.task("build", () => {
