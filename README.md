@@ -14,13 +14,13 @@ Please see the [gulpfile.js](./gulpfile.js) for up to date information on what i
 * Map compiled CSS to source stylesheets with source maps
 * Awesome image optimization
 * HTML minification
-* Gzip all the things! 
+* Gzip all the things!
 
 
 ## Framework agnostic
 
 * Just vainilla ES6 out of the box.
-* No framework preinstalled, but you can use this with React, Angular, Polymer, Ember, you name it. That's your call. 
+* No framework preinstalled, but you can use this with React, Angular, Polymer, Ember, you name it. That's your call.
 
 
 ## libsass
@@ -32,10 +32,10 @@ If your favorite feature is missing and you really need Ruby Sass, you can alway
 
 ## Getting Started
 
-- Install dependencies: `npm install --global gulp jspm`
-- Run `npm install`
+- Install dependencies: `npm install -g jspm`
+- Run `npm install` at root
 - Go to the `src` directory and run `jspm install`
-- Run `gulp serve` to preview and watch for changes
+- Then, on root again, run `gulp serve` to preview and watch for changes
 - Run `gulp build` to generate a distributable, production-ready, `dist` directory
 
 ## Inspired by
