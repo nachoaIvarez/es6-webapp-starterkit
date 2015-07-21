@@ -2,14 +2,18 @@
 
 "use strict";
 
-var gulp = require("gulp");
-var plugins = require("gulp-load-plugins")();
-var browserSync = require("browser-sync");
-var runSequence = require("run-sequence");
+import gulp from "gulp";
+import gulpLoadPlugins from "gulp-load-plugins";
+import browserSync from "browser-sync";
+import runSequence from "run-sequence";
+import del from "del";
+
+const plugins = gulpLoadPlugins();
+const reload = browserSync.reload;
 
 // SASS
-gulp.task("sass", function() {
-  return gulp.src("src/scss/*.scss")
+gulp.task("sass", =>
+    gulp.src("src/scss/*.scss")
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass())
     .pipe(plugins.sourcemaps.write({includeContent: false}))
@@ -19,18 +23,18 @@ gulp.task("sass", function() {
     .pipe(plugins.sourcemaps.write("."))
     .pipe(gulp.dest("src/css"))
     .pipe(browserSync.stream())
-    .on("error", plugins.util.log);
-});
+    .on("error", plugins.util.log)
+);
 
 // CSS
-gulp.task("css", function() {
+gulp.task("css", =>
   return gulp.src("src/css/*.css")
     .pipe(plugins.csso())
     .pipe(gulp.dest("dist/css"))
     .on("error", plugins.util.log);
-});
+);
 
-gulp.task("images", function () {
+gulp.task("images", =>
   return gulp.src("src/images/**/*")
     .pipe(plugins.cache(plugins.imagemin({
       progressive: true,
@@ -40,18 +44,18 @@ gulp.task("images", function () {
       svgoPlugins: [{cleanupIDs: false}]
     })))
     .pipe(gulp.dest("dist/images"));
-});
+);
 
-gulp.task("lint", function() {
+gulp.task("lint", =>
   return gulp.src(["src/js/**/*.js"])
     .pipe(plugins.cached("js")) //Process only changed files
     .pipe(plugins.eslint())
     .pipe(plugins.eslint.format())
     .pipe(plugins.eslint.failOnError());
-});
+);
 
 // BrowserSync Server
-gulp.task("serve", ["sass", "lint"], function() {
+gulp.task("serve", ["sass", "lint"], => {
   browserSync.init([
     "src/js/**/*.js",
     "src/**/*.html"
@@ -73,20 +77,20 @@ gulp.task("serve", ["sass", "lint"], function() {
 gulp.task("default", ["serve"]);
 
 // Copy files to "dist"
-gulp.task("files", function () {
+gulp.task("files", =>
   return gulp.src(["src/*.*", "CNAME"], {dot: true}).pipe(gulp.dest("dist"));
-});
+);
 
 // Delete dist Directory
-gulp.task("clean", require("del").bind(null, ["dist"]));
+gulp.task("clean", del.bind(null, ["dist"]));
 
-gulp.task("jspm", function() {
+gulp.task("jspm", =>
   return gulp.src("src/jspm_packages/**/*").pipe(gulp.dest("dist/jspm_packages"));
-});
+);
 
-gulp.task("js", ["lint"], function() {
+gulp.task("js", ["lint"], =>
   return gulp.src("src/js/**/*.js").pipe(gulp.dest("dist/js"));
-});
+);
 
 // Bundle with jspm
 gulp.task("bundle", ["js", "jspm"], plugins.shell.task([
