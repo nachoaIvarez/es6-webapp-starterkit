@@ -1,5 +1,5 @@
 "format es6";
 
-let hi = `Hope you dig my starterkit :)`;
+let hi = `Hope you dig the starterkit. :)`;
 
 console.log(`${hi}`);
