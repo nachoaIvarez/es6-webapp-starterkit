@@ -9,7 +9,6 @@ import runSequence from "run-sequence";
 import del from "del";
 
 const plugins = gulpLoadPlugins();
-const reload = browserSync.reload;
 
 // SASS
 gulp.task("sass", () => {

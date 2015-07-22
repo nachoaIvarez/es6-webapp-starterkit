@@ -6,7 +6,7 @@
       "babel-runtime": "npm:babel-runtime@^5.1.13",
       "core-js": "npm:core-js@^0.9.4"
     }
-  }
+  },
   "devDependencies": {
     "jspm": "^0.15.6"
   }
