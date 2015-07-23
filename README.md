@@ -1,5 +1,6 @@
 > Future-proof, framework-agnostic, starterkit for modern ES6 web apps using [gulp](http://gulpjs.com/) for the build process and [jspm](http://jspm.io/) to manage dependencies on top of [SystemJS](https://github.com/systemjs/systemjs)
 
+[![Join the chat at https://gitter.im/nachoaIvarez/es6-webapp-starterkit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nachoaIvarez/es6-webapp-starterkit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Features
 
