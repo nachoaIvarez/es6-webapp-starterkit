@@ -1,5 +1,3 @@
-"format es6";
+const MAIL = 'hi@nachoalvarez.me'
 
-let hi = `Hope you dig the starterkit. :)`;
-
-console.log(`${hi}`);
+console.log(`Say hi! ${MAIL}`);
