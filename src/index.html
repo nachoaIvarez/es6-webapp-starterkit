@@ -5,13 +5,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ES6 Webapp starterkit</title>
-
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-
     <link rel="stylesheet" href="css/main.css">
-
-    <script src="/jspm_packages/system.js"></script>
-    <script src="/config.js"></script>
   </head>
   <body>
     <!--[if lt IE 10]>
@@ -37,10 +32,14 @@
       <br>
       <p>With ♥ by <a href="http://nachoalvarez.me/">Nacho</a></p>
     </div>
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <!-- build:js -->
+    <script src="/jspm_packages/system.js"></script>
+    <script src="/config.js"></script>
     <script>
-      System.import('js/main');
+      System.import('js/app');
     </script>
+    <!-- endbuild -->
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;

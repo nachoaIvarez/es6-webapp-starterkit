@@ -2,6 +2,8 @@ node_modules
 src/jspm_packages
 src/css
 test
-.sass-cache
-.tags
-.tags1
+dist
+*.log
+*.sass-cache
+*.tags
+*.tags1
