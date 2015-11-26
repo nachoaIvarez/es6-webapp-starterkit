@@ -4,7 +4,7 @@
 
 ## Features
 
-Please see the [gulpfile.js](./gulpfile.js) for up to date information on what it supports.
+Please see the [gulpfile.js](./gulpfile.babel.js) for up to date information on what it supports.
 
 * Automagic ES6 support
 * Automagically wire-up (All AMD, CommonJS, ES6 Modules, or global) dependencies installed with [jspm](http://jspm.io/)
