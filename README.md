@@ -34,7 +34,7 @@ If your favorite feature is missing and you really need Ruby Sass, you can alway
 ## Getting Started
 
 - Install dependencies: `npm install -g jspm gulp; npm install`
-- Run `gulp serve` to preview and watch for changes
+- Run `gulp serve` to preview and watch for changes with hot reload
 - Run `gulp build` to generate a distributable, production-ready, `dist` directory
 
 ## Inspired by
