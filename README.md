@@ -7,12 +7,12 @@
 
 Please see the [gulpfile](./gulpfile.babel.js) for up to date information on what it supports.
 
-* ES6 support
-* Wire-up (All AMD, CommonJS, ES6 Modules, or global) dependencies installed through [jspm](http://jspm.io/)
+* ES6 out of the box
+* Support ALL dependency formats (AMD, CommonJS, ES6 Modules, or global), and use them as ES6 modules `import io from 'socket.io'` with [jspm](http://jspm.io/)
 * CSS Autoprefixing
-* Built-in preview server with BrowserSync
+* Built-in hot-reload preview server with BrowserSync
 * Compile Sass with [libsass](http://libsass.org)
-* Llint your scripts with ESLint
+* Lint your scripts with ESLint
 * Map compiled JS/CSS to source with source maps
 * Awesome image optimization
 * HTML minification
